@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 function Square (props) {
-
   return (
     <button
       className="square"
@@ -25,24 +24,34 @@ class Board extends React.Component {
     );
   }
 
+  renderBoard(size) {
+    let board = [];
+    for (let i = 0 ; i < size ; i++) {
+      let row = [];
+      for (let j = 0 ; j < size ; j++) {
+        let squareId = i * size + j;
+        row.push(
+          <React.Fragment
+            key={`square${j}`}
+          >
+            {this.renderSquare(squareId)}
+          </React.Fragment>
+        );
+      }
+      board.push(<div className="board-row" key={`row${i}`}>{row}</div>);
+    }
+
+    return (
+      <>
+        {board}
+      </>
+    );
+  }
+
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {this.renderBoard(3)}
       </div>
     );
   }
