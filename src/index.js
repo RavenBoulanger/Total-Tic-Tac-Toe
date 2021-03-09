@@ -162,6 +162,8 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner.player;
+    } else if (this.state.stepNumber === current.squares.length) {
+      status = 'This game is a draw';
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
